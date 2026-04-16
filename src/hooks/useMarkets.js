@@ -29,7 +29,11 @@ export function useMarkets(apiParams) {
       const json = await fetchMarkets(params)
       if (controller.signal.aborted) return
 
-      setMarkets(transformMarkets(json.data ?? []))
+      const now = Date.now()
+      const active = transformMarkets(json.data ?? []).filter(
+        (m) => !m.endDate || m.endDate.getTime() > now,
+      )
+      setMarkets(active)
       setMeta(json.meta ?? null)
     } catch (err) {
       if (err.name === 'AbortError') return

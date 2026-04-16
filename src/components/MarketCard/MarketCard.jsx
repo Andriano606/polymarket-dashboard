@@ -99,7 +99,7 @@ function RiskBadge({ riskTier }) {
 // ── MarketCard ────────────────────────────────────────────────────────────────
 
 export function MarketCard({ market }) {
-  const { question, event, yesProbability, liquidity, volume, endDate, riskTier, slug } = market
+  const { question, event, yesProbability, liquidity, volume, endDate, riskTier } = market
 
   const isExtreme = riskTier === 'extreme'
 
@@ -155,9 +155,9 @@ export function MarketCard({ market }) {
         <span className="text-[10px] text-slate-600 font-mono">
           Expires {formatDate(endDate)}
         </span>
-        {slug && (
+        {event.slug && (
           <a
-            href={`https://polymarket.com/event/${slug}`}
+            href={`https://polymarket.com/event/${event.slug}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-[10px] text-slate-500 hover:text-brand-400 transition-colors"
